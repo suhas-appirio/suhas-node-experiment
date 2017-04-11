@@ -14,7 +14,7 @@
                   '([^&]+?)(&|#|;|$)').exec(source) || [,""])[1].replace(/\+/g,
                   '%20')) || null;
               }
-
+              debugger;
               var accessToken = getURLParameter("access_token", location.hash);
               debugger;
               if (typeof accessToken === 'string' && accessToken.match(/^Atza/)) {
