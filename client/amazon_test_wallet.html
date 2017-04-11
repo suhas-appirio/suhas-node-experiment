@@ -15,7 +15,7 @@
                   '%20')) || null;
               }
               debugger;
-              var accessToken = getURLParameter("access_token", location.hash);
+              var accessToken = getURLParameter("access_token", window.location.href);
               debugger;
               if (typeof accessToken === 'string' && accessToken.match(/^Atza/)) {
                 document.cookie = "amazon_Login_accessToken=" + accessToken +
