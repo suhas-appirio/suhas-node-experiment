@@ -1,0 +1,73 @@
+<html lang="en">
+    <head>
+
+        <style type="text/css">
+            #walletWidgetDiv {
+              width:410px; 
+              height: 243px;
+            }
+        </style>
+
+          <script type='text/javascript'>
+            function getURLParameter(name, source) {
+                return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' +
+                  '([^&]+?)(&|#|;|$)').exec(source) || [,""])[1].replace(/\+/g,
+                  '%20')) || null;
+              }
+
+              var accessToken = getURLParameter("access_token", location.hash);
+
+              if (typeof accessToken === 'string' && accessToken.match(/^Atza/)) {
+                document.cookie = "amazon_Login_accessToken=" + accessToken +
+                  ";secure";
+              }
+
+              window.onAmazonLoginReady = function() {
+              amazon.Login.setClientId('amzn1.application-oa2-client.dcd8b51dede445dab48469012369d373');        
+                amazon.Login.setUseCookie(true);
+              };
+          </script>
+        <script src='https://static-na.payments-amazon.com/OffAmazonPayments/us/
+  sandbox/js/Widgets.js'>
+</script>
+  </script>
+    </head>
+
+    <body>
+        
+        <div id="walletWidgetDiv">
+        </div> 
+
+        <script>
+          var orderReferenceId = null;
+
+          new OffAmazonPayments.Widgets.Wallet({ 
+            sellerId: 'AXC2CV4A2U6U',
+            // Add the onOrderReferenceCreate function to 
+            // generate an Order Reference ID. 
+            onOrderReferenceCreate: function(orderReference) {
+              // Use the following cod to get the generated Order Reference ID.
+              orderReferenceId = orderReference.getAmazonOrderReferenceId();
+            },
+            design: {
+              designMode: 'responsive'
+            },
+            onPaymentSelect: function(orderReference) {  
+              // Replace this code with the action that you want to perform
+              // after the payment method is selected.
+
+              // Ideally this would enable the next action for the buyer
+              // such as a "Continue" or "Place Order" button.
+            },
+            onError: function(error) {
+                alert(error.getErrorMessage());
+              // Your error handling code.
+              // During development you can use the following
+              // code to view error messages:
+              // console.log(error.getErrorCode() + ': ' + error.getErrorMessage());
+              // See "Handling Errors" for more information.
+            }
+          }).bind("walletWidgetDiv");
+        </script>
+    </body>
+</html>
